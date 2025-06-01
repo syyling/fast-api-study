@@ -1,0 +1,42 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# VSCode settings
+.vscode/
+
+# macOS files
+.DS_Store
+
+# PyCharm
+.idea/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local environment
+*.env
+
+# Pipenv
+Pipfile.lock
+
+# pytest cache
+.pytest_cache/
+
+# coverage reports
+htmlcov/
+.coverage
+
+# mypy
+.mypy_cache/
+
+# 기타 네 프로젝트 todos 폴더 (가상환경 들어있는)
+todos/
