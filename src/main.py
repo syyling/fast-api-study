@@ -29,7 +29,7 @@ def get_todos_handler(
         todos=[ToDoSchema.from_orm(todo) for todo in todos]
     )
 
-@app.get("/todos{todo_id}", status_code=200)
+@app.get("/todos/{todo_id}", status_code=200)
 def get_todo_handler(
         todo_id: int,
         session: Session = Depends(get_db)
