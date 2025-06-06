@@ -1,7 +1,8 @@
 from sqlalchemy import Boolean, Column, DateTime, String, Integer, Text
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.sql.schema import ForeignKey
 
-from schema.request import CreateToDoRequest
+from schema.request import CreateToDoRequest, SignUpRequest
 
 Base = declarative_base()
 
@@ -12,6 +13,7 @@ class ToDo(Base) :
     id = Column(Integer, primary_key=True, index=True)
     contents = Column(String(256), nullable=False)
     is_done = Column(Boolean, nullable=False)
+    user_id = Column(Integer, ForeignKey("user.id")) # 외래키
 
     # 오버라이딩
     def __repr__(self) :
@@ -33,3 +35,18 @@ class ToDo(Base) :
         self.is_done = False
         return self
 
+class User(Base) :
+    __tablename__ = "user"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String(256), nullable=False)
+    password = Column(String(256), nullable=False)
+    todos = relationship("ToDo", lazy="joined") # join, eager loading
+
+    # User 객체 생성
+    @classmethod
+    def create(cls, username: str, hashed_password: str) -> "User":
+        return cls(
+            username=username,
+            password=hashed_password,
+        )
